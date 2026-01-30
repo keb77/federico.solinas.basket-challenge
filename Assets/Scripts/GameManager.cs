@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private float waitingToStartTimer = .5f;
     private float countdownToStartTimer = 3f;
-    private float gamePlayingTimer = 5f;
+    private float gamePlayingTimer = 30f;
 
     public event EventHandler OnStateChanged;
 
