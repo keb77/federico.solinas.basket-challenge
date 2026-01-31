@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public float minSwipeDistance = 50f;
-    public float maxSwipeTime = 0.5f;
+    public float minSwipeDistance = 0.05f; // screen height percentage
+    public float maxSwipeDistance = 0.6f;
+    public float maxSwipeTime = 0.5f; // seconds
 
     private bool isTouching = false;
     private bool hasSwipeStarted = false;
+
     private float startPosition;
     private float swipeStartTime;
+    private float currentSwipeMaxDistance;
 
     private void Update()
     {
@@ -61,26 +64,31 @@ public class InputManager : MonoBehaviour
         {
             isTouching = true;
             startPosition = currentPosition;
+            currentSwipeMaxDistance = 0f;
         }
         if (inputHold && isTouching)
         {
+            float currentSwipeDistance = (currentPosition - startPosition) / Screen.height;
+
             if (!hasSwipeStarted)
             {
-                if (currentPosition - startPosition > minSwipeDistance)
+                if (currentSwipeDistance >= minSwipeDistance)
                 {
                     hasSwipeStarted = true;
                     swipeStartTime = Time.time;
-                    Debug.Log("Swipe Started");
+                    currentSwipeMaxDistance = currentSwipeDistance;
                 }
             }
             else
             {
-                // Update UI and feedback here
+                if (currentSwipeDistance > currentSwipeMaxDistance)
+                {
+                    currentSwipeMaxDistance = currentSwipeDistance;
+                }
 
                 if (Time.time - swipeStartTime > maxSwipeTime)
                 {
-                    // Shoot here
-                    Debug.Log("Swipe Timeout. Distance: " + (currentPosition - startPosition));
+                    PlayerShooter.Instance.Shoot(Mathf.Clamp01(currentSwipeMaxDistance / maxSwipeDistance));
 
                     ResetInput();
                 }
@@ -90,14 +98,13 @@ public class InputManager : MonoBehaviour
         {
             if (hasSwipeStarted)
             {
-                // Shoot here
-                Debug.Log("Swipe Ended. Distance: " + (currentPosition - startPosition));
+                PlayerShooter.Instance.Shoot(Mathf.Clamp01(currentSwipeMaxDistance / maxSwipeDistance));
             }
 
             ResetInput();
         }
     }
-    
+
     private void ResetInput()
     {
         isTouching = false;
