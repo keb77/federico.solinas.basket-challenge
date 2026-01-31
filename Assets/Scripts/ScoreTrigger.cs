@@ -1,0 +1,37 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ScoreTrigger : MonoBehaviour
+{
+    public enum TriggerZone
+    {
+        Top,
+        Bottom
+    }
+
+    [SerializeField] private TriggerZone triggerZone;
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Ball"))
+        {
+            if (triggerZone == TriggerZone.Top)
+            {
+                ScoreManager.Instance.OnTopTriggerEnter();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.CompareTag("Ball"))
+        {
+            if (triggerZone == TriggerZone.Bottom)
+            {
+                ScoreManager.Instance.OnBottomTriggerExit();
+            }
+        }
+    }
+}

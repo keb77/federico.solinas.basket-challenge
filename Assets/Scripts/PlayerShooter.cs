@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerShooter : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerShooter : MonoBehaviour
     public float backboardOffset = 0.2f;
     public float backboardShotRadius = 0.01f;
 
+    public ShotAccuracy LastShotAccuracy { get; private set; }
+
     private void Awake()
     {
         Instance = this;
@@ -46,6 +49,7 @@ public class PlayerShooter : MonoBehaviour
     public void Shoot(float shotPower)
     {
         ResetBall();
+        ScoreManager.Instance.ResetScoreTrigger();
 
         ShotAccuracy accuracy = DetermineShotAccuracy(shotPower);
         Vector3 velocity = CalculateShotVelocity(accuracy);
@@ -55,6 +59,8 @@ public class PlayerShooter : MonoBehaviour
 
         Vector3 spinAxis = Vector3.Cross(velocity.normalized, Vector3.up);
         ballRb.angularVelocity = spinAxis * spinSpeed;
+
+        LastShotAccuracy = accuracy;
     }
 
     private ShotAccuracy DetermineShotAccuracy(float shotPower)
