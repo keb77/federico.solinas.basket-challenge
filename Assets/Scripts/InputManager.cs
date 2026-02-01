@@ -6,9 +6,9 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
-    public float minSwipeDistance = 0.05f; // screen height percentage
-    public float maxSwipeDistance = 0.6f;
-    public float maxSwipeTime = 0.5f; // seconds
+    [SerializeField] private float minSwipeDistance = 0.05f; // screen height percentage
+    [SerializeField] private float maxSwipeDistance = 0.6f;
+    [SerializeField] private float maxSwipeTime = 0.5f; // seconds
 
     private bool isTouching = false;
     private bool hasSwipeStarted = false;

@@ -199,6 +199,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27286463}
   m_CullTransparentMesh: 1
+--- !u!1 &59512731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 59512732}
+  - component: {fileID: 59512733}
+  m_Layer: 0
+  m_Name: CameraManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &59512732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59512731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476500142}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &59512733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59512731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e4856c5013d304eb0e009dd4a0f359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 2708809902991724333}
+  hoop: {fileID: 2003715101}
+  behindPlayerHeightOffset: 1
+  behindPlayerDepthOffset: 3
+  followingBallHeightOffset: 0.25
+  followingBallDepthOffset: 2
+  lockedOnHoopHeightOffset: 0
+  lockedOnHoopDepthOffset: 1.5
+  lockOnHoopDistance: 0.75
+  followSpeed: 5
 --- !u!1 &110885118
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +848,7 @@ Transform:
   - {fileID: 727741885}
   - {fileID: 1031211559}
   - {fileID: 1213619417}
+  - {fileID: 59512732}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1915,6 +1970,12 @@ PrefabInstance:
 --- !u!1 &2708809902991724328 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3885316845121162545, guid: 26d8f208d090c6a4ba33282c0eb4d1ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1188047967226429977}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2708809902991724333 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7859235312137367771, guid: 26d8f208d090c6a4ba33282c0eb4d1ef,
     type: 3}
   m_PrefabInstance: {fileID: 1188047967226429977}
   m_PrefabAsset: {fileID: 0}

@@ -13,22 +13,22 @@ public class PlayerShooter : MonoBehaviour
     private Rigidbody ballRb;
 
     [Header("Shot Position Settings")]
-    public float minDistanceFromHoop = 6.0f;
-    public float maxDistanceFromHoop = 10.0f;
-    public float maxAngleFromHoop = 45f;
+    [SerializeField] private float minDistanceFromHoop = 6.0f;
+    [SerializeField] private float maxDistanceFromHoop = 10.0f;
+    [SerializeField] private float maxAngleFromHoop = 45f;
 
     [Header("Shot Settings")]
-    public float timeToTarget = 1.5f;
-    public float timeToTargetBackboard = 1.2f;
-    public float spinSpeed = 30f;
+    [SerializeField] private float timeToTarget = 1.5f;
+    [SerializeField] private float timeToTargetBackboard = 1.2f;
+    [SerializeField] private float spinSpeed = 30f;
 
     [Header("Accuracy Settings")]
-    public float minDistancePerfectShotPower = 0.3f;
-    public float maxDistancePerfectShotPower = 0.7f;
-    public float perfectShotRadius = 0.03f;
-    public float ringShotRadius = 0.05f;
-    public float backboardOffset = 0.2f;
-    public float backboardShotRadius = 0.02f;
+    [SerializeField] private float minDistancePerfectShotPower = 0.3f;
+    [SerializeField] private float maxDistancePerfectShotPower = 0.7f;
+    [SerializeField] private float perfectShotRadius = 0.03f;
+    [SerializeField] private float ringShotRadius = 0.05f;
+    [SerializeField] private float backboardOffset = 0.2f;
+    [SerializeField] private float backboardShotRadius = 0.02f;
 
     public ShotAccuracy LastShotAccuracy { get; private set; }
     
@@ -56,6 +56,8 @@ public class PlayerShooter : MonoBehaviour
     {
         InputManager.Instance.CanShoot = false;
         IsBallInPlay = true;
+
+        CameraManager.Instance.SetCameraFollowingBall();
 
         ShotAccuracy accuracy = DetermineShotAccuracy(shotPower);
         Vector3 velocity = CalculateShotVelocity(accuracy);
@@ -162,6 +164,7 @@ public class PlayerShooter : MonoBehaviour
         }
 
         ResetBall();
+        CameraManager.Instance.SetCameraBehindPlayer();
         ScoreManager.Instance.ResetScoreTrigger();
         if (GameManager.Instance.IsGamePlaying())
         {
