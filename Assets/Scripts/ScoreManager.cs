@@ -16,30 +16,30 @@ public class ScoreManager : MonoBehaviour
     }
 
     private bool ballEnteredTop = false;
-    private bool alreadyScored = false;
+    public bool HasScored { get; private set; }
 
     public void OnTopTriggerEnter()
     {
-        if (alreadyScored) return;
+        if (HasScored) return;
 
         ballEnteredTop = true;
     }
 
     public void OnBottomTriggerExit()
     {
-        if (alreadyScored) return;
+        if (HasScored) return;
 
         if (ballEnteredTop)
         {
             ScoreManager.Instance.AddScore();
-            alreadyScored = true;
+            HasScored = true;
         }
     }
 
     public void ResetScoreTrigger()
     {
         ballEnteredTop = false;
-        alreadyScored = false;
+        HasScored = false;
     }
 
     private void AddScore()

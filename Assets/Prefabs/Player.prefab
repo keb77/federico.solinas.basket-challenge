@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162339524648971360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.41666666, y: 0.07000009, z: -0.16666667}
+  m_LocalPosition: {x: -0.2, y: 0.1, z: 0.5}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -223,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670181869748973732}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.41666666, y: 0.07000009, z: 0.16666667}
+  m_LocalPosition: {x: 0.2, y: 0.1, z: 0.5}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -352,7 +352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6699783597419469508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -376,13 +376,16 @@ MonoBehaviour:
   BackboardTarget: {fileID: 0}
   minDistanceFromHoop: 6
   maxDistanceFromHoop: 10
+  maxAngleFromHoop: 45
+  timeToTarget: 1.5
+  timeToTargetBackboard: 1.2
   spinSpeed: 30
   minDistancePerfectShotPower: 0.3
   maxDistancePerfectShotPower: 0.7
-  perfectShotRadius: 0.025
+  perfectShotRadius: 0.03
   ringShotRadius: 0.05
   backboardOffset: 0.2
-  backboardShotRadius: 0.01
+  backboardShotRadius: 0.02
 --- !u!1 &6872876284872878196
 GameObject:
   m_ObjectHideFlags: 0

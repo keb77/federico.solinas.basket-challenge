@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-
     private enum GameState
     {
         WaitingToStart,
@@ -49,14 +48,16 @@ public class GameManager : MonoBehaviour
                 {
                     currentState = GameState.GamePlaying;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
+                    InputManager.Instance.CanShoot = true;
                 }
                 break;
             case GameState.GamePlaying:
                 gamePlayingTimer -= Time.deltaTime;
-                if (gamePlayingTimer <= 0f)
+                if (gamePlayingTimer <= 0f && !PlayerShooter.Instance.IsBallInPlay)
                 {
                     currentState = GameState.GameOver;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
+                    InputManager.Instance.CanShoot = false;
                 }
                 break;
             case GameState.GameOver:

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerShooter : MonoBehaviour
 {
@@ -13,20 +12,27 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Transform BackboardTarget;
     private Rigidbody ballRb;
 
-    [Header("Shot Settings")]
+    [Header("Shot Position Settings")]
     public float minDistanceFromHoop = 6.0f;
     public float maxDistanceFromHoop = 10.0f;
+    public float maxAngleFromHoop = 45f;
+
+    [Header("Shot Settings")]
+    public float timeToTarget = 1.5f;
+    public float timeToTargetBackboard = 1.2f;
     public float spinSpeed = 30f;
 
     [Header("Accuracy Settings")]
     public float minDistancePerfectShotPower = 0.3f;
     public float maxDistancePerfectShotPower = 0.7f;
-    public float perfectShotRadius = 0.025f;
+    public float perfectShotRadius = 0.03f;
     public float ringShotRadius = 0.05f;
     public float backboardOffset = 0.2f;
-    public float backboardShotRadius = 0.01f;
+    public float backboardShotRadius = 0.02f;
 
     public ShotAccuracy LastShotAccuracy { get; private set; }
+    
+    public bool IsBallInPlay { get;  private set; } = false;
 
     private void Awake()
     {
@@ -48,8 +54,8 @@ public class PlayerShooter : MonoBehaviour
 
     public void Shoot(float shotPower)
     {
-        ResetBall();
-        ScoreManager.Instance.ResetScoreTrigger();
+        InputManager.Instance.CanShoot = false;
+        IsBallInPlay = true;
 
         ShotAccuracy accuracy = DetermineShotAccuracy(shotPower);
         Vector3 velocity = CalculateShotVelocity(accuracy);
@@ -104,8 +110,8 @@ public class PlayerShooter : MonoBehaviour
         Vector3 startPosition = ball.transform.position;
         Vector3 targetPosition = Vector3.zero;
         Vector3 gravity = Physics.gravity;
-        float timeToTarget = 1.5f;
         Vector3 noise = Vector3.zero;
+        float finalTimeToTarget = timeToTarget;
 
         switch (accuracy)
         {
@@ -130,11 +136,11 @@ public class PlayerShooter : MonoBehaviour
                 break;
             case ShotAccuracy.Backboard:
                 targetPosition = BackboardTarget.position;
-                timeToTarget = 1.2f;
+                finalTimeToTarget = timeToTargetBackboard;
                 break;
         }
 
-        Vector3 velocity = (targetPosition + noise - startPosition) / timeToTarget - 0.5f * gravity * timeToTarget;
+        Vector3 velocity = (targetPosition + noise - startPosition) / finalTimeToTarget - 0.5f * gravity * finalTimeToTarget;
         return velocity;
     }
 
@@ -144,5 +150,42 @@ public class PlayerShooter : MonoBehaviour
         ballRb.velocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
         ball.transform.position = transform.position;
+
+        IsBallInPlay = false;
+    }
+
+    public void OnShotEnd(bool hasScored)
+    {
+        if (hasScored)
+        {
+            MovePlayerToRandomPosition();
+        }
+
+        ResetBall();
+        ScoreManager.Instance.ResetScoreTrigger();
+        if (GameManager.Instance.IsGamePlaying())
+        {
+            InputManager.Instance.CanShoot = true;
+        }
+    }
+
+    private void MovePlayerToRandomPosition()
+    {
+        Vector3 newPosition = GenerateRandomPosition();
+        transform.parent.position = newPosition;
+
+        Vector3 newDirection = PerfectTarget.position - newPosition;
+        newDirection.y = 0f;
+        transform.parent.rotation = Quaternion.LookRotation(newDirection);
+    }
+
+    private Vector3 GenerateRandomPosition()
+    {
+        float distance = Random.Range(minDistanceFromHoop, maxDistanceFromHoop);
+        float angle = Random.Range(-maxAngleFromHoop, maxAngleFromHoop);
+        Vector3 direction = Quaternion.Euler(0, angle, 0) * PerfectTarget.forward;
+        Vector3 position = PerfectTarget.position + direction * distance;
+        position.y = 0f;
+        return position;
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Instance { get; private set; }
+
     public float minSwipeDistance = 0.05f; // screen height percentage
     public float maxSwipeDistance = 0.6f;
     public float maxSwipeTime = 0.5f; // seconds
@@ -15,8 +17,17 @@ public class InputManager : MonoBehaviour
     private float swipeStartTime;
     private float currentSwipeMaxDistance;
 
+    public bool CanShoot { get; set; } = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Update()
     {
+        if (!CanShoot) return;
+
         bool inputDown = false;
         bool inputHold = false;
         bool inputUp = false;
