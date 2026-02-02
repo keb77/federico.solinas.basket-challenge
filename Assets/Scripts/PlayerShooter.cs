@@ -30,19 +30,18 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float backboardOffset = 0.2f;
     [SerializeField] private float backboardShotRadius = 0.02f;
 
-    public ShotAccuracy LastShotAccuracy { get; private set; }
-    
-    public bool IsBallInPlay { get;  private set; } = false;
+    private ShotAccuracy lastShotAccuracy;
+    private bool isBallInPlay = false;
 
     private void Awake()
     {
         Instance = this;
-
+        
         ballRb = ball.GetComponent<Rigidbody>();
         ResetBall();
     }
 
-    public enum ShotAccuracy
+    private enum ShotAccuracy
     {
         Perfect,
         RingShort,
@@ -55,7 +54,7 @@ public class PlayerShooter : MonoBehaviour
     public void Shoot(float shotPower)
     {
         InputManager.Instance.CanShoot = false;
-        IsBallInPlay = true;
+        isBallInPlay = true;
 
         CameraManager.Instance.SetCameraFollowingBall();
 
@@ -68,7 +67,7 @@ public class PlayerShooter : MonoBehaviour
         Vector3 spinAxis = Vector3.Cross(velocity.normalized, Vector3.up);
         ballRb.angularVelocity = spinAxis * spinSpeed;
 
-        LastShotAccuracy = accuracy;
+        lastShotAccuracy = accuracy;
     }
 
     private ShotAccuracy DetermineShotAccuracy(float shotPower)
@@ -153,7 +152,7 @@ public class PlayerShooter : MonoBehaviour
         ballRb.angularVelocity = Vector3.zero;
         ball.transform.position = transform.position;
 
-        IsBallInPlay = false;
+        isBallInPlay = false;
     }
 
     public void OnShotEnd(bool hasScored)
@@ -166,6 +165,7 @@ public class PlayerShooter : MonoBehaviour
         ResetBall();
         CameraManager.Instance.SetCameraBehindPlayer();
         ScoreManager.Instance.ResetScoreTrigger();
+        BackboardBonusManager.Instance.TryActivateBonus();
         if (GameManager.Instance.IsGamePlaying())
         {
             InputManager.Instance.CanShoot = true;
@@ -190,5 +190,19 @@ public class PlayerShooter : MonoBehaviour
         Vector3 position = PerfectTarget.position + direction * distance;
         position.y = 0f;
         return position;
+    }
+
+    public bool IsPerfectShot()
+    {
+        return lastShotAccuracy == ShotAccuracy.Perfect;
+    }
+    public bool IsBackboardShot()
+    {
+        return lastShotAccuracy == ShotAccuracy.Backboard;
+    }
+
+    public bool IsBallInPlay()
+    {
+        return isBallInPlay;
     }
 }

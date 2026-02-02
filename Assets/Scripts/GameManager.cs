@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GamePlaying:
                 gamePlayingTimer -= Time.deltaTime;
-                if (gamePlayingTimer <= 0f && !PlayerShooter.Instance.IsBallInPlay)
+                if (gamePlayingTimer <= 0f && !PlayerShooter.Instance.IsBallInPlay())
                 {
                     currentState = GameState.GameOver;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);

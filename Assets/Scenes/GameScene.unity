@@ -849,6 +849,7 @@ Transform:
   - {fileID: 1031211559}
   - {fileID: 1213619417}
   - {fileID: 59512732}
+  - {fileID: 1206716812}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1200,6 +1201,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playAgainButton: {fileID: 202933907}
   mainMenuButton: {fileID: 110885122}
+--- !u!1 &1206716811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1206716812}
+  - component: {fileID: 1206716813}
+  m_Layer: 0
+  m_Name: BackboardBonusManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1206716812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206716811}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476500142}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206716813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206716811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d593d522e23fa41a2d0f3ef77f6dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationChance: 0.2
+  commonBonusChance: 0.5
+  uncommonBonusChance: 0.35
+  commonBonusPoints: 4
+  uncommonBonusPoints: 6
+  rareBonusPoints: 8
 --- !u!1 &1213619416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8f50a027828984bb44cce9c7c0d923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perfectShotScore: 3
+  regularShotScore: 2
 --- !u!1 &1281468257
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,9 @@ public class ScoreManager : MonoBehaviour
 
     public int Score { get; private set; }
 
+    [SerializeField] private int perfectShotScore = 3;
+    [SerializeField] private int regularShotScore = 2;
+
     private void Awake()
     {
         Instance = this;
@@ -44,22 +47,23 @@ public class ScoreManager : MonoBehaviour
 
     private void AddScore()
     {
-        PlayerShooter.ShotAccuracy accuracy = PlayerShooter.Instance.LastShotAccuracy;
-
-        switch (accuracy)
+        if (PlayerShooter.Instance.IsPerfectShot())
         {
-            case PlayerShooter.ShotAccuracy.Perfect:
-                Score += 3;
-                break;
-            case PlayerShooter.ShotAccuracy.RingShort:
-            case PlayerShooter.ShotAccuracy.RingLong:
-            case PlayerShooter.ShotAccuracy.Backboard:
-                Score += 2;
-                break;
-            default:
-                break;
+            Score += perfectShotScore;
         }
-        
+        else
+        {
+            if (BackboardBonusManager.Instance.IsBonusActive && PlayerShooter.Instance.IsBackboardShot())
+            {
+                Score += regularShotScore + BackboardBonusManager.Instance.CurrentBonusPoints;
+                BackboardBonusManager.Instance.ResetBonus();
+            }
+            else
+            {
+                Score += regularShotScore;
+            }
+        }
+
         Debug.Log("Score: " + Score);
     }
 }
