@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverUI : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Button mainMenuButton;
 
@@ -41,6 +43,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Show()
     {
+        scoreText.text = "Score: " + ScoreManager.Instance.Score.ToString();
         gameObject.SetActive(true);
     }
     private void Hide()

@@ -16,12 +16,11 @@ public class GameManager : MonoBehaviour
     }
     private GameState currentState;
 
-    private float waitingToStartTimer = .5f;
-    private float countdownToStartTimer = 3f;
-    private float gamePlayingTimer = 30f;
+    [SerializeField] private float waitingToStartTimer = .5f;
+    [SerializeField] private float countdownToStartTimer = 3f;
+    [SerializeField] private float gamePlayingTimer = 120f;
 
     public event EventHandler OnStateChanged;
-
 
     private void Awake()
     {

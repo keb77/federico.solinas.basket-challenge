@@ -160,12 +160,12 @@ public class PlayerShooter : MonoBehaviour
         if (hasScored)
         {
             MovePlayerToRandomPosition();
+            BackboardBonusManager.Instance.TryActivateBonus();
         }
 
         ResetBall();
         CameraManager.Instance.SetCameraBehindPlayer();
         ScoreManager.Instance.ResetScoreTrigger();
-        BackboardBonusManager.Instance.TryActivateBonus();
         if (GameManager.Instance.IsGamePlaying())
         {
             InputManager.Instance.CanShoot = true;
