@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float waitingToStartTimer = .5f;
     [SerializeField] private float countdownToStartTimer = 3f;
     [SerializeField] private float gamePlayingTimer = 120f;
+    private float gamePlayingTimerMax;
 
     public event EventHandler OnStateChanged;
 
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         currentState = GameState.WaitingToStart;
+
+        gamePlayingTimerMax = gamePlayingTimer;
     }
 
     private void Update()
@@ -81,5 +84,10 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver()
     {
         return currentState == GameState.GameOver;
+    }
+
+    public float GetGamePlayingTimerNormalized()
+    {
+        return gamePlayingTimer / gamePlayingTimerMax;
     }
 }

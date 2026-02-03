@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InputManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class InputManager : MonoBehaviour
     private float currentSwipeMaxDistance;
 
     public bool CanShoot { get; set; } = false;
+
+    public event EventHandler OnSwipeStarted;
+    public event EventHandler OnSwipeEnded;
 
     private void Awake()
     {
@@ -88,6 +92,8 @@ public class InputManager : MonoBehaviour
                     hasSwipeStarted = true;
                     swipeStartTime = Time.time;
                     currentSwipeMaxDistance = currentSwipeDistance;
+
+                    OnSwipeStarted?.Invoke(this, EventArgs.Empty);
                 }
             }
             else
@@ -99,7 +105,9 @@ public class InputManager : MonoBehaviour
 
                 if (Time.time - swipeStartTime > maxSwipeTime)
                 {
-                    PlayerShooter.Instance.Shoot(Mathf.Clamp01(currentSwipeMaxDistance / maxSwipeDistance));
+                    PlayerShooter.Instance.Shoot(GetCurrentSwipeMaxDistanceNormalized());
+
+                    OnSwipeEnded?.Invoke(this, EventArgs.Empty);
 
                     ResetInput();
                 }
@@ -109,7 +117,9 @@ public class InputManager : MonoBehaviour
         {
             if (hasSwipeStarted)
             {
-                PlayerShooter.Instance.Shoot(Mathf.Clamp01(currentSwipeMaxDistance / maxSwipeDistance));
+                PlayerShooter.Instance.Shoot(GetCurrentSwipeMaxDistanceNormalized());
+
+                OnSwipeEnded?.Invoke(this, EventArgs.Empty);
             }
 
             ResetInput();
@@ -120,5 +130,27 @@ public class InputManager : MonoBehaviour
     {
         isTouching = false;
         hasSwipeStarted = false;
+    }
+
+    public float GetCurrentSwipeMaxDistanceNormalized()
+    {
+        return Mathf.Clamp01(currentSwipeMaxDistance / maxSwipeDistance);
+    }
+    public void ResetCurrentSwipeMaxDistance()
+    {
+        currentSwipeMaxDistance = 0f;
+    }
+
+    public Vector2 GetInputPosition()
+    {
+        if (Input.touchCount > 0)
+        {
+            return Input.GetTouch(0).position;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            return Input.mousePosition;
+        }
+        return Vector2.zero;
     }
 }

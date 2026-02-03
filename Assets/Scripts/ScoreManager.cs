@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private int perfectShotScore = 3;
     [SerializeField] private int regularShotScore = 2;
+    [SerializeField] private ScoreFlyerGeneratorUI scoreFlyerGeneratorUI;
 
     private void Awake()
     {
@@ -47,23 +48,26 @@ public class ScoreManager : MonoBehaviour
 
     private void AddScore()
     {
+        int scoreToAdd = 0;
+
         if (PlayerShooter.Instance.IsPerfectShot())
         {
-            Score += perfectShotScore;
+            scoreToAdd = perfectShotScore;
         }
         else
         {
             if (BackboardBonusManager.Instance.IsBonusActive && PlayerShooter.Instance.IsBackboardShot())
             {
-                Score += regularShotScore + BackboardBonusManager.Instance.CurrentBonusPoints;
+                scoreToAdd += regularShotScore + BackboardBonusManager.Instance.CurrentBonusPoints;
                 BackboardBonusManager.Instance.ResetBonus();
             }
             else
             {
-                Score += regularShotScore;
+                scoreToAdd += regularShotScore;
             }
         }
 
-        Debug.Log("Score: " + Score);
+        Score += scoreToAdd;
+        scoreFlyerGeneratorUI.CreateScoreFlyer(scoreToAdd);
     }
 }
