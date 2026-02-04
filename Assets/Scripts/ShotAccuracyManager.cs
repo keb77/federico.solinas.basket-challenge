@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ShotAccuracy
+    {
+        Perfect,
+        RingShort,
+        RingLong,
+        MissShort,
+        MissLong,
+        Backboard
+    }
+
 public class ShotAccuracyManager : MonoBehaviour
 {
     public static ShotAccuracyManager Instance { get; private set; }
@@ -18,19 +28,9 @@ public class ShotAccuracyManager : MonoBehaviour
         Instance = this;
     }
 
-    public enum ShotAccuracy
-    {
-        Perfect,
-        RingShort,
-        RingLong,
-        MissShort,
-        MissLong,
-        Backboard
-    }
-
     public ShotAccuracy DetermineShotAccuracy(float shotPower, Transform ball, Transform perfectTarget)
     {
-        float perfectShotPower = GetPerfectShotPower();
+        float perfectShotPower = GetPerfectShotPower(ball, perfectTarget);
         float backboardShotPower = perfectShotPower + backboardShotOffset;
 
         float perfectPowerDelta = Mathf.Abs(shotPower - perfectShotPower);
@@ -54,9 +54,11 @@ public class ShotAccuracyManager : MonoBehaviour
         }
     }
 
-    public float GetPerfectShotPower()
+    public float GetPerfectShotPower(Transform ball, Transform perfectTarget)
     {
-        float distanceFromHoop = PlayerShooter.Instance.GetDistanceFromHoop();
+        Vector2 ballPosition2D = new Vector2(ball.position.x, transform.position.z);
+        Vector2 hoopPosition2D = new Vector2(perfectTarget.position.x, perfectTarget.position.z);
+        float distanceFromHoop = Vector2.Distance(ballPosition2D, hoopPosition2D);
 
         float minDistanceFromHoop = ShotPositionManager.Instance.GetMinDistanceFromHoop();
         float maxDistanceFromHoop = ShotPositionManager.Instance.GetMaxDistanceFromHoop();
@@ -64,6 +66,7 @@ public class ShotAccuracyManager : MonoBehaviour
         float t = Mathf.InverseLerp(minDistanceFromHoop, maxDistanceFromHoop, distanceFromHoop);
         return Mathf.Lerp(minDistancePerfectShotPower, maxDistancePerfectShotPower, t);
     }
+    
     public float GetBackboardShotOffset()
     {
         return backboardShotOffset;

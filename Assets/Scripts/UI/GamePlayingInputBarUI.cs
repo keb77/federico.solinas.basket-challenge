@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GamePlayingInputBarUI : MonoBehaviour
 {
+    [SerializeField] private Transform playerShooter;
+    [SerializeField] private Transform perfectTarget;
+
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Image barFillImage;
     [SerializeField] private Image perfectShotZoneImage;
@@ -24,7 +26,7 @@ public class GamePlayingInputBarUI : MonoBehaviour
         {
             barFillImage.fillAmount = InputManager.Instance.GetCurrentSwipeMaxDistanceNormalized();
 
-            float perfectShotPower = ShotAccuracyManager.Instance.GetPerfectShotPower();
+            float perfectShotPower = ShotAccuracyManager.Instance.GetPerfectShotPower(playerShooter, perfectTarget);
             float backboardShotPower = perfectShotPower + ShotAccuracyManager.Instance.GetBackboardShotOffset();
             float perfectShotRadius = ShotAccuracyManager.Instance.GetPerfectShotRadius();
             float backboardShotRadius = ShotAccuracyManager.Instance.GetBackboardShotRadius();

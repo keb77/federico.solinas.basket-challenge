@@ -4,17 +4,40 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] private Button playButton;
-    [SerializeField] private Button quitButton;
+    [SerializeField] private PlayQuitUI playQuitUI;
+    [SerializeField] private SelectGameModeUI selectGameModeUI;
+    [SerializeField] private SelectDifficultyUI selectDifficultyUI;
 
-    private void Awake()
+    private void Start()
     {
-        playButton.onClick.AddListener(() => {
-            SceneManager.LoadScene(1);
-        });
+        ShowPlayQuit();
+    }
+    
+    public void ShowPlayQuit()
+    {
+        playQuitUI.Show();
+        selectGameModeUI.Hide();
+        selectDifficultyUI.Hide();
+    }
+    public void ShowSelectGameMode()
+    {
+        selectGameModeUI.Show();
+        playQuitUI.Hide();
+        selectDifficultyUI.Hide();
+    }
+    public void ShowSelectDifficulty()
+    {
+        selectDifficultyUI.Show();
+        playQuitUI.Hide();
+        selectGameModeUI.Hide();
+    }
 
-        quitButton.onClick.AddListener(() => {
-            Application.Quit();
-        });
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

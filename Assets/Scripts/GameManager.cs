@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    [SerializeField] private PlayerShooter playerShooter;
+    [SerializeField] private GameObject ai;
 
     private enum GameState
     {
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GamePlaying:
                 gamePlayingTimer -= Time.deltaTime;
-                if (gamePlayingTimer <= 0f && !PlayerShooter.Instance.IsBallInPlay())
+                if (gamePlayingTimer <= 0f && !playerShooter.IsBallInPlay())
                 {
                     currentState = GameState.GameOver;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);

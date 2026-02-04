@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class ShotEndDetector : MonoBehaviour
 {
+    [SerializeField] private PlayerShooter playerShooter;
+    [SerializeField] private AIShooter aiShooter;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ball"))
+        if (other.CompareTag("PlayerBall"))
         {
-            PlayerShooter.Instance.OnShotEnd(ScoreManager.Instance.HasScored);
+            playerShooter.OnShotEnd(ScoreManager.Instance.HasScored(ShooterType.Player));
+        }
+        else if (other.CompareTag("AIBall"))
+        {
+            aiShooter.OnShotEnd(ScoreManager.Instance.HasScored(ShooterType.AI));
         }
     }
 }

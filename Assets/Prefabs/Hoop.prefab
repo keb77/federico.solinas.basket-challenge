@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ed971ee6e150846b2921c166044268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShooter: {fileID: 0}
+  aiShooter: {fileID: 0}
 --- !u!1 &3933592149484566333
 GameObject:
   m_ObjectHideFlags: 0

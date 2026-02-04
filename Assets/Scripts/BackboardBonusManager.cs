@@ -51,8 +51,6 @@ public class BackboardBonusManager : MonoBehaviour
                 CurrentBonusPoints = rareBonusPoints;
                 SetRareBonusMaterial();
             }
-
-            Debug.Log($"Backboard Bonus Activated! +{CurrentBonusPoints} points for backboard shots.");
         }
     }
 

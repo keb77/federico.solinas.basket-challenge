@@ -7,6 +7,8 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+    [SerializeField] private PlayerShooter playerShooter;
+
     [SerializeField] private float minSwipeDistance = 0.05f; // screen height percentage
     [SerializeField] private float maxSwipeDistance = 0.6f;
     [SerializeField] private float maxSwipeTime = 0.5f; // seconds
@@ -105,7 +107,7 @@ public class InputManager : MonoBehaviour
 
                 if (Time.time - swipeStartTime > maxSwipeTime)
                 {
-                    PlayerShooter.Instance.Shoot(GetCurrentSwipeMaxDistanceNormalized());
+                    playerShooter.Shoot(GetCurrentSwipeMaxDistanceNormalized());
 
                     OnSwipeEnded?.Invoke(this, EventArgs.Empty);
 
@@ -117,7 +119,7 @@ public class InputManager : MonoBehaviour
         {
             if (hasSwipeStarted)
             {
-                PlayerShooter.Instance.Shoot(GetCurrentSwipeMaxDistanceNormalized());
+                playerShooter.Shoot(GetCurrentSwipeMaxDistanceNormalized());
 
                 OnSwipeEnded?.Invoke(this, EventArgs.Empty);
             }

@@ -6,57 +6,70 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    public int Score { get; private set; }
+    [Header("References")]
+    [SerializeField] private PlayerShooter playerShooter;
+    [SerializeField] private AIShooter aiShooter;
+    [SerializeField] private ScoreFlyerGeneratorUI scoreFlyerGeneratorUI;
 
+    [Header("Score Settings")]
     [SerializeField] private int perfectShotScore = 3;
     [SerializeField] private int regularShotScore = 2;
-    [SerializeField] private ScoreFlyerGeneratorUI scoreFlyerGeneratorUI;
+
+    private class ShooterScoreData
+    {
+        public int Score;
+        public bool BallEnteredTop;
+        public bool HasScored;
+    }
+    private Dictionary<ShooterType, ShooterScoreData> shooterData = new Dictionary<ShooterType, ShooterScoreData>();
 
     private void Awake()
     {
         Instance = this;
 
-        Score = 0;
+        shooterData[ShooterType.Player] = new ShooterScoreData();
+        shooterData[ShooterType.AI] = new ShooterScoreData();
     }
 
-    private bool ballEnteredTop = false;
-    public bool HasScored { get; private set; }
-
-    public void OnTopTriggerEnter()
+    public void OnTopTriggerEnter(ShooterType shooterType)
     {
-        if (HasScored) return;
-
-        ballEnteredTop = true;
+        ShooterScoreData data = shooterData[shooterType];
+        if (data.HasScored) return;
+        data.BallEnteredTop = true;
     }
 
-    public void OnBottomTriggerExit()
+    public void OnBottomTriggerExit(ShooterType shooterType)
     {
-        if (HasScored) return;
-
-        if (ballEnteredTop)
+        ShooterScoreData data = shooterData[shooterType];
+        if (data.HasScored) return;
+        if (data.BallEnteredTop)
         {
-            ScoreManager.Instance.AddScore();
-            HasScored = true;
+            AddScore(shooterType);
+            data.HasScored = true;
         }
     }
 
-    public void ResetScoreTrigger()
+    public void ResetScoreTrigger(ShooterType shooterType)
     {
-        ballEnteredTop = false;
-        HasScored = false;
+        ShooterScoreData data = shooterData[shooterType];
+        data.BallEnteredTop = false;
+        data.HasScored = false;
     }
 
-    private void AddScore()
+    private void AddScore(ShooterType shooterType)
     {
+        Shooter shooter = shooterType == ShooterType.Player ? (Shooter)playerShooter : (Shooter)aiShooter;
+        ShooterScoreData data = shooterData[shooterType];
+
         int scoreToAdd = 0;
 
-        if (PlayerShooter.Instance.IsPerfectShot())
+        if (shooter.IsPerfectShot())
         {
             scoreToAdd = perfectShotScore;
         }
         else
         {
-            if (BackboardBonusManager.Instance.IsBonusActive && PlayerShooter.Instance.IsBackboardShot())
+            if (BackboardBonusManager.Instance.IsBonusActive && shooter.IsBackboardShot())
             {
                 scoreToAdd += regularShotScore + BackboardBonusManager.Instance.CurrentBonusPoints;
                 BackboardBonusManager.Instance.ResetBonus();
@@ -67,7 +80,20 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
-        Score += scoreToAdd;
-        scoreFlyerGeneratorUI.CreateScoreFlyer(scoreToAdd);
+        data.Score += scoreToAdd;
+
+        if (shooterType == ShooterType.Player)
+        {
+            scoreFlyerGeneratorUI.CreateScoreFlyer(scoreToAdd);
+        }
+    }
+
+    public int GetScore(ShooterType shooterType)
+    {
+        return shooterData[shooterType].Score;
+    }
+    public bool HasScored(ShooterType shooterType)
+    {
+        return shooterData[shooterType].HasScored;
     }
 }
