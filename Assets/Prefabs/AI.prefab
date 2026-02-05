@@ -30,6 +30,7 @@ Transform:
   m_Children:
   - {fileID: 1035307983571597160}
   - {fileID: 1514697232494000206}
+  - {fileID: 4622331536941077264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -80,6 +81,7 @@ MonoBehaviour:
   ball: {fileID: 0}
   perfectTarget: {fileID: 0}
   backboardTarget: {fileID: 0}
+  fireballHandler: {fileID: 8727217243365152882}
   timeToTarget: 1.5
   timeToTargetBackboard: 1.35
   spinSpeed: 30
@@ -222,6 +224,55 @@ Transform:
   m_Father: {fileID: 6735848216207451941}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3586192521687948226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4622331536941077264}
+  - component: {fileID: 8727217243365152882}
+  m_Layer: 0
+  m_Name: AIFireballHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4622331536941077264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3586192521687948226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6735848216207451941}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8727217243365152882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3586192521687948226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d673d53cee4f39f4c82a682d5de21160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargePerBasket: 2
+  bonusActivationThreshold: 5
+  decaySpeedWhenInactive: 0.2
+  decaySpeedWhenActive: 0.4
+  bonusMultiplier: 2
 --- !u!1 &4737907865759840555
 GameObject:
   m_ObjectHideFlags: 0

@@ -80,6 +80,12 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
+        FireballHandler fireballHandler = shooter.GetFireballHandler();
+        if (fireballHandler.IsBonusActive())
+        {
+            scoreToAdd *= fireballHandler.GetBonusMultiplier();
+        }
+        
         data.Score += scoreToAdd;
 
         if (shooterType == ShooterType.Player)

@@ -14,6 +14,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] protected GameObject ball;
     [SerializeField] protected Transform perfectTarget;
     [SerializeField] private Transform backboardTarget;
+    [SerializeField] private FireballHandler fireballHandler;
 
     [Header("Shot Settings")]
     [SerializeField] private float timeToTarget = 1.5f;
@@ -23,7 +24,7 @@ public class Shooter : MonoBehaviour
     private Rigidbody ballRb;
     private ShotAccuracy lastShotAccuracy;
     private bool isBallInPlay = false;
-    
+
     public ShooterType ShooterType { get; protected set; }
 
     protected virtual void Awake()
@@ -97,10 +98,15 @@ public class Shooter : MonoBehaviour
         if (hasScored)
         {
             MoveToRandomPosition();
+            fireballHandler.OnBasketScored();
+        }
+        else
+        {
+            fireballHandler.OnBasketMissed();
         }
 
         ResetBall();
-        
+
         ScoreManager.Instance.ResetScoreTrigger(ShooterType);
     }
 
@@ -136,5 +142,10 @@ public class Shooter : MonoBehaviour
     public bool IsBackboardShot()
     {
         return lastShotAccuracy == ShotAccuracy.Backboard;
+    }
+    
+    public FireballHandler GetFireballHandler()
+    {
+        return fireballHandler;
     }
 }
