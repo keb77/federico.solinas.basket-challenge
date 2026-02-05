@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private PlayerShooter playerShooter;
     [SerializeField] private AIShooter aiShooter;
-    [SerializeField] private ScoreFlyerGeneratorUI scoreFlyerGeneratorUI;
+    [SerializeField] private ScoreEffectPlayer scoreEffectPlayer;
 
     [Header("Score Settings")]
     [SerializeField] private int perfectShotScore = 3;
@@ -90,7 +90,7 @@ public class ScoreManager : MonoBehaviour
 
         if (shooterType == ShooterType.Player)
         {
-            scoreFlyerGeneratorUI.CreateScoreFlyer(scoreToAdd);
+            scoreEffectPlayer.PlayScoreEffects(scoreToAdd);
         }
     }
 

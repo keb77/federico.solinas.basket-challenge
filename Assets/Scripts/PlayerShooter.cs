@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerShooter : Shooter
 {
+    [Header("SFX Settings")]
+    [SerializeField] private AudioSource shootSFXSource;
+    [SerializeField] private AudioClip shootSFX;
+
     protected override void Awake()
     {
         ShooterType = ShooterType.Player;
@@ -17,6 +21,8 @@ public class PlayerShooter : Shooter
 
         InputManager.Instance.CanShoot = false;
         CameraManager.Instance.SetCameraFollowingBall();
+
+        shootSFXSource.PlayOneShot(shootSFX);
     }
 
     public override void OnShotEnd(bool hasScored)

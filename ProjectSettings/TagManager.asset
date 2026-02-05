@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerBall
   - AIBall
+  - Hoop
   layers:
   - Default
   - TransparentFX
