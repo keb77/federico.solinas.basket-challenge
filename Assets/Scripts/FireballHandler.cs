@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FireballHandler : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class FireballHandler : MonoBehaviour
     [SerializeField] private float decaySpeedWhenInactive = 0.2f;
     [SerializeField] private float decaySpeedWhenActive = 0.4f;
     [SerializeField] private int bonusMultiplier = 2;
+
+    public event EventHandler OnStateChanged;
 
     private float currentCharge = 0f;
     private bool isBonusActive = false;
@@ -46,10 +49,14 @@ public class FireballHandler : MonoBehaviour
     private void ActivateBonus()
     {
         isBonusActive = true;
+
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
     private void DeactivateBonus()
     {
         isBonusActive = false;
+
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsBonusActive()

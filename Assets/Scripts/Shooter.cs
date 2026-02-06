@@ -15,6 +15,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] protected Transform perfectTarget;
     [SerializeField] private Transform backboardTarget;
     [SerializeField] private FireballHandler fireballHandler;
+    [SerializeField] private Animator shooterAnimator;
 
     [Header("Shot Settings")]
     [SerializeField] private float timeToTarget = 1.5f;
@@ -36,6 +37,8 @@ public class Shooter : MonoBehaviour
     public virtual void Shoot(float shotPower)
     {
         if (isBallInPlay) return;
+
+        shooterAnimator.SetTrigger("Shoot");
 
         isBallInPlay = true;
 
