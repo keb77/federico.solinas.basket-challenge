@@ -22,6 +22,13 @@ public class GameSettings : MonoBehaviour
     public GameMode CurrentGameMode { get; set; } = GameMode.Practice;
     public AIDifficulty CurrentAIDifficulty { get; set; } = AIDifficulty.Rookie;
 
+    public Dictionary<AIDifficulty, string> AIDifficultyNames = new Dictionary<AIDifficulty, string>
+    {
+        { AIDifficulty.Rookie, "Rick" },
+        { AIDifficulty.Pro, "Pete" },
+        { AIDifficulty.AllStar, "Ace" }
+    };
+
     private void Awake()
     {
         Instance = this;

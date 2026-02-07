@@ -19,7 +19,7 @@ public class Shooter : MonoBehaviour
 
     [Header("Shot Settings")]
     [SerializeField] private float timeToTarget = 1.5f;
-    [SerializeField] private float timeToTargetBackboard = 1.35f;
+    [SerializeField] private float timeToTargetBackboard = 1.25f;
     [SerializeField] private float spinSpeed = 30f;
 
     private Rigidbody ballRb;
@@ -85,6 +85,7 @@ public class Shooter : MonoBehaviour
             case ShotAccuracy.MissLong:
                 targetPosition = perfectTarget.position;
                 noise = (targetPosition - startPosition).normalized * 1.5f;
+                finalTimeToTarget = timeToTargetBackboard;
                 break;
             case ShotAccuracy.Backboard:
                 targetPosition = backboardTarget.position;

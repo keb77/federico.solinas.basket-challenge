@@ -352,7 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4712184987146825711}
   m_Layer: 0
-  m_Name: Meshes
+  m_Name: HoopVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,6 +408,134 @@ Transform:
   m_Father: {fileID: 7693982210070318195}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5979248140469846069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2296514783883807756}
+  - component: {fileID: 5502217120327283591}
+  m_Layer: 0
+  m_Name: BallBounceAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2296514783883807756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979248140469846069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.106, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7693982209160840888}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5502217120327283591
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979248140469846069}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7096268107368397562
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,9 +685,10 @@ GameObject:
   - component: {fileID: 7693982209160840886}
   - component: {fileID: 7693982209160840889}
   - component: {fileID: 7693982209160840887}
+  - component: {fileID: 2802563868894008251}
   m_Layer: 0
   m_Name: Backboard
-  m_TagString: Hoop
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -578,6 +707,7 @@ Transform:
   m_Children:
   - {fileID: 935584124912945307}
   - {fileID: 7693982209955710952}
+  - {fileID: 2296514783883807756}
   m_Father: {fileID: 4712184987146825711}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -645,6 +775,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04000001, y: 0.44, z: 0.6000001}
   m_Center: {x: -0.0000009536743, y: 0, z: -6.3681633e-18}
+--- !u!114 &2802563868894008251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693982209160840891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce5c093387484f4ca56f2ebc8af3876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionSound: {fileID: 8300000, guid: 60ff5eb69ef492040a9cf5f3999a794b, type: 3}
+  audioSource: {fileID: 5502217120327283591}
+  targetTag: PlayerBall
+  maxVolume: 1
 --- !u!1 &7693982209160989633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,9 +1694,10 @@ GameObject:
   - component: {fileID: 7693982210548092578}
   - component: {fileID: 7693982210548092581}
   - component: {fileID: 7693982210548092579}
+  - component: {fileID: 9043601603665383397}
   m_Layer: 0
   m_Name: Rim
-  m_TagString: Hoop
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1634,6 +1781,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8803937527578110353, guid: 05fbd9110c7fa9641b30379c8dd7195a, type: 3}
+--- !u!114 &9043601603665383397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693982210548092583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce5c093387484f4ca56f2ebc8af3876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionSound: {fileID: 8300000, guid: 60ff5eb69ef492040a9cf5f3999a794b, type: 3}
+  audioSource: {fileID: 5502217120327283591}
+  targetTag: PlayerBall
+  maxVolume: 0.3
 --- !u!1 &7693982210689357108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,7 +1975,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7693982211070671168}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.4, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0.36, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1866,6 +2029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreFlyerGeneratorUI: {fileID: 1075039469}
-  scoreVFXPrefab: {fileID: 0}
+  scoreVFXPrefab: {fileID: 6263782476919498309, guid: 1fd2749f2a4056446881dce86ed70c39,
+    type: 3}
   scoreSound: {fileID: 8300000, guid: 7463e5e78bb6baa4b8caeec3645d5ae7, type: 3}
   audioSource: {fileID: 1637517047832643636}

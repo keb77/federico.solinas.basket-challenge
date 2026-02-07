@@ -10,7 +10,7 @@ public class AIShooter : Shooter
     [SerializeField] private float rookieDelayBeforeShoot = 2.0f;
     [Header("Pro Settings")]
     [SerializeField] private float proNoiseAmount = 0.07f;
-    [SerializeField] private bool proCanGoForBackboard = false;
+    [SerializeField] private bool proCanGoForBackboard = true;
     [SerializeField] private float proDelayBeforeShoot = 1.5f;
     [Header("All Star Settings")]
     [SerializeField] private float allStarNoiseAmount = 0.04f;

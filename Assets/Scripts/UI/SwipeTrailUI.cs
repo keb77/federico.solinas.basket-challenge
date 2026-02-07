@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SwipeTrailUI : MonoBehaviour
 {
     [SerializeField] private LineRenderer swipeTrailUIPrefab;
-    [SerializeField] private float clearSpeed = 0.5f;
+    [SerializeField] private float clearSpeed = 1f;
     [SerializeField] private float distanceFromCamera = 1f;
 
     private LineRenderer currentTrail;

@@ -24,18 +24,7 @@ public class GamePlayingScoreUI : MonoBehaviour
             }
             else
             {
-                switch (aiDifficulty)
-                {
-                    case AIDifficulty.Rookie:
-                        aiScoreText.text = "Rookie Rick: " + aiScore.ToString();
-                        break;
-                    case AIDifficulty.Pro:
-                        aiScoreText.text = "Pro Pete: " + aiScore.ToString();
-                        break;
-                    case AIDifficulty.AllStar:
-                        aiScoreText.text = "All-Star Ace: " + aiScore.ToString();
-                        break;
-                }
+                aiScoreText.text = GameSettings.Instance.AIDifficultyNames[aiDifficulty] + ": " + aiScore.ToString();
             }
         }
     }

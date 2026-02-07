@@ -58,18 +58,7 @@ public class GameOverUI : MonoBehaviour
         }
         else
         {
-            switch (GameSettings.Instance.CurrentAIDifficulty)
-            {
-                case AIDifficulty.Rookie:
-                    aiScoreText.text = "Rookie Rick's Score: " + aiScore.ToString();
-                    break;
-                case AIDifficulty.Pro:
-                    aiScoreText.text = "Pro Pete's Score: " + aiScore.ToString();
-                    break;
-                case AIDifficulty.AllStar:
-                    aiScoreText.text = "All-Star Ace's Score: " + aiScore.ToString();
-                    break;
-            }
+            aiScoreText.text = GameSettings.Instance.AIDifficultyNames[aiDifficulty] + ": " + aiScore.ToString();
         }
 
         if (gameMode == GameMode.Practice)

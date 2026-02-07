@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform hoop;
 
     [Header("Camera Settings")]
-    [SerializeField] private float behindPlayerHeightOffset = 1f;
+    [SerializeField] private float behindPlayerHeightOffset = 0.8f;
     [SerializeField] private float behindPlayerDepthOffset = 3f;
     [SerializeField] private float followingBallHeightOffset = 0.25f;
     [SerializeField] private float followingBallDepthOffset = 2f;

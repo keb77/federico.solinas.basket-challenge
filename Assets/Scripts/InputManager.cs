@@ -82,6 +82,8 @@ public class InputManager : MonoBehaviour
             isTouching = true;
             startPosition = currentPosition;
             currentSwipeMaxDistance = 0f;
+
+            OnSwipeStarted?.Invoke(this, EventArgs.Empty);
         }
         if (inputHold && isTouching)
         {
@@ -94,8 +96,6 @@ public class InputManager : MonoBehaviour
                     hasSwipeStarted = true;
                     swipeStartTime = Time.time;
                     currentSwipeMaxDistance = currentSwipeDistance;
-
-                    OnSwipeStarted?.Invoke(this, EventArgs.Empty);
                 }
             }
             else

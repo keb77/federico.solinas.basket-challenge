@@ -19,7 +19,7 @@ public class ShotAccuracyManager : MonoBehaviour
     [SerializeField] private float minDistancePerfectShotPower = 0.3f;
     [SerializeField] private float maxDistancePerfectShotPower = 0.7f;
     [SerializeField] private float perfectShotRadius = 0.03f;
-    [SerializeField] private float ringShotRadius = 0.05f;
+    [SerializeField] private float ringShotRadius = 0.6f;
     [SerializeField] private float backboardShotOffset = 0.2f;
     [SerializeField] private float backboardShotRadius = 0.02f;
 
