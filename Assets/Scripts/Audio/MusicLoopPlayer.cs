@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
+/// Plays different music loops based on the game state (playing, victory, defeat, draw).
 public class MusicLoopPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
@@ -11,8 +9,21 @@ public class MusicLoopPlayer : MonoBehaviour
     [SerializeField] private AudioClip defeatLoop;
     [SerializeField] private AudioClip drawLoop;
 
+    private void OnValidate()
+    {
+        if (audioSource == null || gamePlayingLoop == null || victoryLoop == null || defeatLoop == null || drawLoop == null)
+        {
+            Debug.LogWarning("MusicLoopPlayer: Some fields are not assigned.", this);
+        }
+    }
+
     private void Start()
     {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager instance not found.");
+            return;
+        }
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
     }
 
@@ -53,5 +64,13 @@ public class MusicLoopPlayer : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnStateChanged -= GameManager_OnStateChanged;
+        }
     }
 }

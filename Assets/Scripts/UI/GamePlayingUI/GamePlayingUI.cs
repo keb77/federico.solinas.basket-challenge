@@ -1,34 +1,39 @@
 using UnityEngine;
 
-/// Plays a sound effect when the game countdown starts.
-public class PlayCountdownSFX : MonoBehaviour
+/// Manages the UI elements that are shown during the game playing state.
+public class GamePlayingUI : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-
-    private void OnValidate()
-    {
-        if (audioSource == null)
-        {
-            Debug.LogWarning("PlayCountdownSFX: Some fields are not assigned.", this);
-        }
-    }
-
     private void Start()
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager instance not found.");
+            Debug.LogWarning("GameManager instance not found.");
             return;
         }
         GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+
+        Hide();
     }
 
     private void GameManager_OnStateChanged(object sender, System.EventArgs e)
     {
-        if (GameManager.Instance.IsCountdownToStartActive())
+        if (GameManager.Instance.IsGamePlaying())
         {
-            audioSource.Play();
+            Show();
         }
+        else
+        {
+            Hide();
+        }
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
