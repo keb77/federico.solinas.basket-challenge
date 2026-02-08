@@ -159,10 +159,10 @@ public class InputManager : MonoBehaviour
         if (hasSwipeStarted)
         {
             playerShooter.Shoot(GetCurrentSwipeMaxDistanceNormalized());
-
-            OnSwipeEnded?.Invoke(this, EventArgs.Empty);
         }
 
+        OnSwipeEnded?.Invoke(this, EventArgs.Empty);
+        
         ResetInput();
     }
 

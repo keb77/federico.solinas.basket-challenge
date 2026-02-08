@@ -17,9 +17,9 @@ public class GamePlayingScoreUI : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance == null || GameSettings.Instance == null)
+        if (GameManager.Instance == null)
         {
-            Debug.LogWarning("GameManager or GameSettings instance not found.");
+            Debug.LogWarning("GameManager instance not found.");
         }
     }
 

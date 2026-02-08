@@ -135,7 +135,7 @@ public class AIShooter : Shooter
         float shotPower = shotAccuracyManager.GetPerfectShotPower(transform, perfectTarget) + Random.Range(-noiseAmount, noiseAmount);
 
         // Add the backboard shot offset if needed
-        if (canGoForBackboard && (backboardBonusManager == null || backboardBonusManager.IsBonusActive))
+        if (canGoForBackboard && backboardBonusManager.IsBonusActive)
         {
             shotPower += shotAccuracyManager.GetBackboardShotOffset();
         }
